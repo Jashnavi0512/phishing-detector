@@ -4,7 +4,8 @@ def check_phishing(message):
     phishing_keywords = [
         "urgent", "click here", "verify", "password",
         "bank", "account locked", "login", "update",
-        "suspend", "confirm", "free", "winner", "lottery"
+        "suspend", "confirm", "free", "winner", "lottery",
+        "otp", "verify now", "limited time", "security alert"
     ]
 
     score = 0
@@ -17,14 +18,17 @@ def check_phishing(message):
         score += 2
 
     if score >= 3:
-        return "⚠️ High Risk Phishing"
+        result = "⚠️ High Risk Phishing"
     elif score == 2:
-        return "⚠️ Suspicious Message"
+        result = "⚠️ Suspicious Message"
     else:
-        return "✅ Safe Message"
+        result = "✅ Safe Message"
 
+    return result, score  # 👈 return both
 
 
 user_input = input("Enter the email/message: ")
-result = check_phishing(user_input)
+result, score = check_phishing(user_input)
+
 print("\nResult:", result)
+print(f"Risk Score: {score}")
